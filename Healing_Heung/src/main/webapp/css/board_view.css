@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+
+.whole {
+	margin: 10px;
+	width: 850px;
+}
+
+.top {
+	width: 100%;
+}
+
+.block {
+	display: inline-block;
+}
+
+.bdtitle {
+	width: 79%;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.date, .like {
+	width: 19%;
+	text-align: right;
+	color: gray;
+}
+
+.line {
+	display: block;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	border-color: #505050;
+}
+
+.id {
+	width: 79%;
+	color: gray;
+	font-size: 10;
+}
+
+.content {
+	height: 300px;
+}
+
+.info {
+	width: 100%;
+}
+.rewriter{
+	font-size: 12px;
+	width: 50%;
+	color: gray;
+}
+.redate{
+	font-size:10px;
+	color: gray;
+}
+
+#bdLike {
+	width: 20px;
+}
+.replyview{
+	margin: 20px;
+	
+}
+#replyComment {
+	width: 600px;
+	height: 100px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+#updateboard {
+	margin-left: 80%;
+}
+#replyupdateform{
+	display: inline-block;
+}
+ /* 
+div {
+	border: solid 1px;
+}  */

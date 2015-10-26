@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.ReplyMapper">
+
+<!-- 	
+
+	<select id="selectBoardByPage" parameterType="hashmap"
+		resultType="board">
+		SELECT *
+		FROM (SELECT sub.*, ROWNUM AS RNUM
+		FROM ( select *
+		from board order by board_no) sub)
+		WHERE RNUM BETWEEN
+		#{FROM} AND #{TO}
+	</select>
+
+	<update id="updateBoard" parameterType="board">
+		update board set
+		board_title = #{boardTitle},
+		board_comment=#{boardComment},
+		course_no
+		=#{courseNo}
+		where board_no=#{boardNo}
+	</update>
+
+	<update id="readCount" parameterType="board">
+		update board set
+		read =
+		#{read}
+		where board_no=#{boardNo}
+	</update>
+
+-->
+
+	<delete id="deleteReply" parameterType="int">
+		delete from reply where
+		reply_no = #{replyNo}
+	</delete>
+	
+	<delete id="deleteReplyboardNo" parameterType="int">
+		delete from reply where
+		board_no = #{boardNo}
+	</delete>
+	 
+	 
+	<insert id="insertReply" parameterType="reply">
+		insert into reply
+		(reply_no, reply_comment, board_no, member_id)
+		values(reply_seq.nextval,
+		#{replyComment},
+		#{boardNo},
+		#{memberId})
+	</insert>
+	
+	 <select id="selectReplyByReplyNo" parameterType="int" 
+	 resultType="reply">
+		select *
+		from reply
+		where
+		board_no=#{boardNo}
+		order by REPLY_REG_DATE desc
+	</select>
+	
+	<select id="selectReplycnt" parameterType = "int"
+		resultType="int">
+		select
+		count(*)
+		from reply
+		where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectBoardNo" parameterType="int" resultType="int">
+		select b.* 
+		from board b,reply r 
+		where r.board_no=b.board_no
+		and r.reply_no = #{replyNo}
+	</select>
+	
+	<update id="updateReply" parameterType="reply">
+		update reply set
+		reply_comment=#{replyComment}
+		where reply_no=#{replyNo}
+	</update>
+	
+</mapper>

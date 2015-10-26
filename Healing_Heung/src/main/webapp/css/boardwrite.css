@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+.form-horizontal {
+	width: 750px;
+	margin-left: 250px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+#main_table {
+	text-align: center;
+	margin: 20px;
+	
+
+}
+
+textarea[name="boardComment"] {
+  height: 400px;
+}
+
+button {
+	text-align: center;
+	color: blue;
+}

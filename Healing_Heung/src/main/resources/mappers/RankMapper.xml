@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.RankMapper">
+
+<select id="LikeCount" parameterType="int">
+	select count(*) 
+	from course c, course_like_unlike l 
+	where c.course_no = l.course_no 
+	and c.course_no = #{courseNo}
+</select>
+
+<select id="LikeDayRank" resultType="Date">   <!-- 하루동안 랭킹  -->
+	select c.course_no, c.course_name, count(l.course_no) 
+	from course c, course_like_unlike l 
+	where c.course_no = l.course_no 
+	and c.COURSE_REG_DATE = sysdate 
+	group by c.course_no, c.course_name order by count(l.course_no) desc
+</select>
+
+<select id="LikeWeekRank" parameterType="Date">   <!-- 일주일동안 랭킹  -->
+	select c.course_no, c.course_name, count(l.course_no)
+	from course c, course_like_unlike l
+	where c.course_no = l.course_no 
+	and c.course_reg_date = sysdate 
+  	and c.course_reg_date between to_char(sysdate ,'yyyymmdd')
+	and to_char(sysdate-7,'yyyymmdd')
+  	group by c.course_no, c.course_name order by count(l.course_no) desc	
+</select>
+
+<select id="LikeMonthRank" parameterType="Date">   <!-- 한달동안 랭킹 -->
+	select c.course_no, c.course_name, count(l.course_no)
+	from course c, course_like_unlike l
+	where c.course_no = l.course_no 
+  	and l.course_like_reg_date between to_char(sysdate,'mm')
+	and to_char(sysdate,'mm')
+	and l.course_like_reg_date = sysdate 
+  	group by c.course_no, c.course_name order by count(l.course_no) desc
+</select>
+
+
+</mapper>

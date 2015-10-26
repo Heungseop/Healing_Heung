@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+.place_detail_imgs{
+	width : 800px;
+	height: 500px;
+	
+}
+#place_detail{
+	
+	text-align: center;
+	margin-left: 20px;
+	border: 1px solid black;
+	width: 1190px;
+	
+}
+#place_detail_img{
+	display: inline-block;
+	text-align: center;
+}
+#map{
+	width: 750px; 
+	height: 500px;
+	display: inline-block;
+}
+#likediv{
+	text-align: right;
+}
+#place_imgs{
+	
+}

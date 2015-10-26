@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+#mainheader{
+	
+   
+	
+}
+#cssmenu {
+	flex : none;
+}
+#top {
+	display: inline;
+}
+#logo {
+	padding-left: 15px;
+	}
+#topgroup {
+	width:794px;
+	float:right;
+}
+#topgroup ul.menu {
+	
+	padding:8px 12px 14px 0;
+	text-align:right
+}
+#topgroup ul.menu li {
+	display:inline;
+	padding:0;
+	background:none;
+	color:#dfdfdf
+}
+#topgroup ul.menu li+li {
+	display:inline;
+	padding-left:8px;
+	padding-right:230px;
+	background:url(/images/main/bgline_menu.gif) no-repeat left top;
+	color:#dfdfdf
+}
+#topgroup ul.menu li a {
+	padding-right:4px;
+	color:#8a8a8a
+}

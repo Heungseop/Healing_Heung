@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.CourseMapper">
+	<insert id="insertcourse" parameterType="course">
+		insert into
+		course(course_no, course_name, course_distance, course_cost,member_id
+		,course_comment)
+		values(course_seq.nextval,
+		#{courseName},
+		#{courseDistance},
+		#{courseCost},
+		#{memberId},
+		#{courseComment})
+	</insert>
+
+	<insert id="insertMNcourse" parameterType="hashmap">
+		insert into mncourse
+		values(mncourse_seq.nextval,
+		#{courseNo},
+		#{placeNo})
+	</insert>
+
+	<select id="selectCoursebyNo" parameterType="int" resultType="course">
+		select * from course where course_no = #{courseNo}
+	</select>
+
+	<select id="selectCourseByName" parameterType="string"
+		resultType="course">
+		select * from course where course_name = #{courseName}
+	</select>
+
+	<select id="selectPlaceNoInCourse" parameterType="int"
+		resultType="course">
+		select place_no from mncourse where course_no = #{courseNo}
+	</select>
+
+
+	<select id="selectCourseOfAll" resultType="course">
+		select * from course
+		order by course_no desc
+	</select>
+
+	<select id="selectCourseNoByCourseName" resultType="int"
+		parameterType="string">
+		select course_No from course where
+		Course_name=#{courseName}
+	</select>
+
+	<insert id="applyLike" parameterType="hashmap">
+		insert into
+		course_like_unlike
+		values(course_like_unlike_seq.nextval,
+		#{judge},
+		#{courseNo},
+		#{memberId}, sysdate)
+	</insert>
+
+	<select id="didYouRecommend" parameterType="hashmap" resultType="int">
+		select count(*) from course_like_unlike
+		where course_no = #{courseNo}
+		and
+		course_like_unlike_judge = #{judge} and
+		member_id = #{memberId}
+	</select>
+
+	<select id="selectCourseLikeCountByCourseNo" parameterType="int"
+		resultType="int">
+		select count(*) from
+		course_like_unlike cl,course c
+		where
+		c.course_no =#{courseNo} and
+		c.COURSE_NO=cl.COURSE_NO
+	</select>
+
+	<select id="selectRankingListDuringPeriod" parameterType="int"
+		resultType="course">
+		select c.*
+		from course c , 
+			(select s.*, ROWNUM as rnum 
+			from(select
+				course_no, count(*) 
+				from course_like_unlike
+				where course_like_reg_date
+				between sysdate-#{period} and sysdate
+				group by course_no
+				order by count(*) desc
+				) s
+			)ss
+		where ss.course_no = c.course_no
+		order by ss.rnum 
+
+	</select>
+
+	<select id="selectPlaceListOfCourse" parameterType="hashmap"
+		resultType="place">
+		select p.*
+		from mncourse m, place p
+		where m.place_no =
+		p.place_no
+		and m.course_no = #{courseNo}
+	</select>
+	<select id="selectCourseLike" resultType="int" parameterType="hashmap">
+		select count(*) from course_like_unlike
+		where course_no = #{courseNo}
+		and course_like_unlike_judge = #{judge}
+	</select>
+
+
+
+	<update id="updateCourseByCourse" parameterType="hashmap">
+		update course
+		set course_name=#{courseName},
+		course_distance=#{courseDistance},
+		course_cost=#{courseCost},
+		course_comment=#{courseComment}
+		where course_no=#{courseNo}
+	</update>
+	<delete id="deleteCoursePlaceByCourseNo" parameterType="int">
+		delete
+		mncourse where course_no=#{courseNo}
+	</delete>
+</mapper>

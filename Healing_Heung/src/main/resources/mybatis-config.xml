@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="dto.Member" alias="member" />
+		<typeAlias type="dto.Board" alias="board" />
+		<typeAlias type="dto.Place" alias="place" /> 
+		<typeAlias type="dto.Reply" alias="reply" /> 
+		<typeAlias type="dto.ImageUrl" alias="imageurl" /> 
+		<typeAlias type="dto.Course" alias="course" /> 
+		<typeAlias type="dto.Rank" alias="rank" /> 
+	</typeAliases>
+
+
+	<mappers>
+		<mapper resource="mappers/MembersMapper.xml" />
+		<mapper resource="mappers/BoardMapper.xml" />
+		<mapper resource="mappers/PlaceMapper.xml" /> 
+		<mapper resource="mappers/ReplyMapper.xml" /> 
+		<mapper resource="mappers/ImageUrlMapper.xml" /> 
+		<mapper resource="mappers/CourseMapper.xml" /> 
+		<mapper resource="mappers/RankMapper.xml" /> 
+	</mappers>
+
+
+</configuration>
+

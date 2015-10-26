@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+label{
+	display: inline-block;
+	width : 90px;
+}
+#id,#pass{
+	width : 120px;
+	margin-left: 5px;
+}
+#loginText{
+	background-color: #c0c0c0;
+	text-align: center;
+	margin-bottom : 10px;
+}
+nav{
+	width: 230px;
+}
+.navborder{
+	border : 1px solid black;
+}
+.loginbuttonclass{
+	text-align: center;
+	width: 65px;
+}
+#button {
+	font-size: 8px;
+	margin-left: 10px;
+}
+#loginbutton {
+	color: black;
+}

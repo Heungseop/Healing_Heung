@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.MemberMapper">
+
+	<select id="selectMemberById" parameterType="string" resultType="Member">
+		select
+		*
+		from
+		Member
+		where
+		Member_id=#{memberId}
+	</select>
+	
+	<select id="selectIdByMember" parameterType="string" resultType="string">
+		select
+		Member_id
+		from
+		Member
+		where
+		member_name=#{memberName} and
+		member_email=#{memberEmail} and
+		member_phone=#{memberPhone}
+	</select>
+	
+	<select id="selectPassByMember" parameterType="hashmap" resultType="string">
+		select
+		member_password
+		from
+		Member
+		where
+		member_name=#{memberName} and
+		member_email=#{memberEmail} and
+		member_phone=#{memberPhone} and
+		member_id=#{memberId}
+	</select>
+		
+	
+
+	<select id="selectAllMember" resultType="Member">
+		select
+		*
+		from
+		Member
+	</select>
+
+	<insert id="insertMember" parameterType="member">
+		insert into
+		member(member_id ,
+		member_password ,
+		member_name ,
+		member_birth ,
+		member_email,
+		member_phone
+		) values(#{memberId},
+		#{memberPassword},
+		#{memberName},
+		#{memberBirth},
+		#{memberEmail},
+		#{memberPhone})
+	</insert>
+	<update id="updateMember" parameterType="member">
+		update member set
+		member_password = #{memberPassword},
+		member_email=#{memberEmail},
+		member_phone=#{memberPhone}
+		where member_id=#{memberId}
+	</update>
+	
+	<update id="updatePassById" parameterType="hashmap" >
+		update member set
+		member_password = #{memberPassword}
+		where member_id=#{memberId}
+	</update>
+	
+
+	
+	<delete id="deleteMember" parameterType="string">
+	delete from member where member_id = #{memberId}
+	</delete>
+</mapper>

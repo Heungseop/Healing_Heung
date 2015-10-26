@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.BoardMapper">
+
+	<select id="selectBoardByNo" parameterType="int" resultType="board">
+		select
+		*
+		from
+		board
+		where
+		board_no=#{boardNo}
+	</select>
+
+	<select id="selectLike" parameterType="hashmap" resultType="int">
+		select count(*)
+		from board_like
+		where board_no=#{boardNo}
+
+		<if test="memberId != null">
+			and member_id = #{memberId}
+		</if>
+	</select>
+	<select id="selectBoardLikeByBoardNo" parameterType="int" resultType="int">
+		select count(*)
+		from board_like
+		where board_no=#{boardNo}
+
+	</select>
+	
+
+	<select id="selectBoardByPage" parameterType="hashmap"
+		resultType="board">
+		SELECT *
+		FROM (SELECT sub.*, ROWNUM AS RNUM
+		FROM ( select *
+		from board order by board_no desc) sub)
+		WHERE RNUM BETWEEN
+		#{FROM} AND
+		#{TO}
+	</select>
+
+
+	<insert id="insertBoard" parameterType="board">
+		insert into board
+		(board_no, board_title,
+		<if test="boardComment != null">board_comment,</if>
+		<if test="courseNo != 0">course_no,</if>
+		 member_id, board_read)
+		values(board_seq.nextval, #{boardTitle},
+		<if test="boardComment != null">#{boardComment},</if>
+		<if test="courseNo != 0">#{courseNo},</if>
+		 #{memberId}, 0)
+	</insert>
+
+
+	<insert id="applyLike" parameterType="hashmap">
+		insert into
+		board_like
+		values(board_like_seq.nextval,
+		#{boardNo},
+		#{memberId})
+	</insert>
+
+	<update id="updateBoard" parameterType="board">
+		update board set
+		board_title = #{boardTitle},
+		board_comment=#{boardComment}
+		<if test="courseNo != 0">
+		,course_no=#{courseNo}</if>
+		where board_no=#{boardNo}
+	</update>
+
+	<update id="readCount" parameterType="board">
+		update board set
+		board_read = #{boardRead}
+		where board_no=#{boardNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where
+		board_no = #{boardNo} 
+	</delete>
+	
+	<delete id="deleteBoardlikeByBoardNo" parameterType="int">
+		delete from board_like where
+		board_no = #{boardNo} 
+	</delete>
+	
+
+	<select id="selectBoardCnt" resultType="int">
+		select
+		count(*)
+		from
+		board
+	</select>
+	<select id="selectCourseNoByBoardNo" resultType="String" parameterType="int">
+	select c.course_no from course c,board b
+	where c.course_no=b.course_no and
+	b.board_no=#{boardNo}
+	</select>
+
+</mapper>

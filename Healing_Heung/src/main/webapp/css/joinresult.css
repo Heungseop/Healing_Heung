@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+h2 {
+	text-align: center;
+}
+
+#result {
+	margin-left: 180px;
+}
+
+#font {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+#okfont {
+	margin-left: 210px;
+}
+
+#ok {
+	margin-left: 350px;
+}
+
+#failfont {
+	margin-left: 340px;
+}

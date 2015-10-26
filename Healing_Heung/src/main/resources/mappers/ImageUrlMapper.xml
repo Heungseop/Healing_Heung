@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.ImageUrlMapper">
+
+	<insert id="insertimageurl" parameterType="imageurl">
+		insert into image_url(
+		image_url_no,
+		image_url_url,
+		place_no)
+		values(image_url_seq.nextVAL,
+			   #{imageUrlUrl},
+			   #{placeNo})
+	</insert>
+	<insert id="insertimagefileurl" parameterType="imageurl">
+		insert into image_url(
+		image_url_no,
+		place_no,
+		image_url_file)
+		values(image_url_seq.nextVAL,
+			   #{placeNo},
+			   #{imageUrlFile})
+	</insert>
+	
+	<delete id="deleteimageurl" parameterType="int">
+		delete from image_url
+		where image_url_no=#{imageUrlNo}
+	</delete>
+	
+	<delete id="deleteimageurlByPlaceNo" parameterType="int">
+		delete from image_url
+		where place_no=#{placeNo}
+	</delete>
+	
+	
+ 	
+</mapper>

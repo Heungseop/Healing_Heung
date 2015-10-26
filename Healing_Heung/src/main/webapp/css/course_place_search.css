@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+#course_place_search{
+	text-align : left;
+	
+	padding-left : 50px;
+	width: 500px;
+	
+}
+.form-group{
+
+	
+}
+.col-lg-15{
+	padding-left : 50px;
+	text-align : center;
+	width : 300px;
+}
+#searchresult{
+	font-size : 15px;
+	display: inline-block;
+	padding : 20px;
+}
