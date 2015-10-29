@@ -47,4 +47,6 @@ public interface PlaceService {
 	public int selectDetailNoByName(String region);
 
 	public void createGrouping(int placeNo, int selectDetailNoByName);
+	
+	public List<Place> selectPlaceNine(int rnum);
 }

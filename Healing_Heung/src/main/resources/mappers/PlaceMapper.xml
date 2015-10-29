@@ -6,37 +6,47 @@
 
 	<select id="selectPlace" parameterType="string" resultType="place">
 		select p.*
-		from big_group bg, group_detail gd, place_grouping pg, place p
+		from big_group bg, group_detail gd, place_grouping pg, place
+		p
 		where
-		bg.big_GROUP_NO = gd.big_GROUP_NO 
-		and	gd.GROUP_DETAIL_NO = pg.GROUP_DETAIL_NO 
-		and pg.PLACE_NO = p.PLACE_NO 
-		and	gd.GROUP_DETAIL_NAME = #{groupDetail}
+		bg.big_GROUP_NO = gd.big_GROUP_NO
+		and gd.GROUP_DETAIL_NO = pg.GROUP_DETAIL_NO
+		and pg.PLACE_NO = p.PLACE_NO
+		and gd.GROUP_DETAIL_NAME = #{groupDetail}
 	</select>
-	
-	<select id="selectPlaceSearchByPlaceName" parameterType="String" resultType="place">
-		select * from place where place_name like '%' || #{placeName} ||'%' and place_cert = 1
+
+	<select id="selectPlaceSearchByPlaceName" parameterType="String"
+		resultType="place">
+		select * from place where place_name like '%' ||
+		#{placeName} ||'%' and place_cert = 1
 	</select>
-	
+
 
 	<select id="selectPlaceAll" resultType="place">
 		select *
 		from place
 	</select>
-	
+	<select id="selectPlaceNine" parameterType="hashmap" resultType="place">
+		select ss.*
+		from (select sub.*, ROWNUM as rnum from (select * from place)sub)ss
+		where ss.rnum between #{from} and #{to}
+
+	</select>
+
 	<select id="selectCertFalsePlace" resultType="place">
 		select *
 		from place
 		where place_cert=0
 	</select>
 
-	<select id="selectCertFalsePlaceByMemberId" resultType="place" parameterType="string">
+	<select id="selectCertFalsePlaceByMemberId" resultType="place"
+		parameterType="string">
 		select p.*
-		from place p, member m 
-		where p.member_id=m.member_id and 
-		p.place_cert=0 and 
+		from place p, member m
+		where p.member_id=m.member_id and
+		p.place_cert=0 and
 		m.member_id=#{memberId}
-		
+
 	</select>
 
 
@@ -48,12 +58,12 @@
 		select i.IMAGE_URL_File from IMAGE_URL i
 		where i.PLACE_NO = #{placeNo}
 	</select>
-	
+
 	<select id="selectPlaceByNo" parameterType="int" resultType="place">
 		select * from place where place_no = #{placeNo}
 	</select>
-	
-	
+
+
 	<insert id="applyLike" parameterType="hashmap">
 		insert into
 		place_like
@@ -62,16 +72,16 @@
 		#{memberId})
 	</insert>
 	<update id="updatePlaceCertTrue" parameterType="int">
-		update place set 
+		update place set
 		Place_Cert=1
 		where place_no=#{PlaceNo}
-		
+
 	</update>
 	<update id="updatePlaceCertFalse" parameterType="int">
-		update place set 
+		update place set
 		Place_Cert=0
 		where place_no=#{PlaceNo}
-		
+
 	</update>
 
 	<select id="selectLike" parameterType="hashmap" resultType="int">
@@ -81,27 +91,30 @@
 			and member_id = #{memberId}
 		</if>
 	</select>
-	<select id="selectPlaceLikeCountByPlaceNo" parameterType="int" resultType="int">
-		select count(*) from 
-		place_like pl, place p  
-		where 
-		p.place_no =#{placeNo} and 
+	<select id="selectPlaceLikeCountByPlaceNo" parameterType="int"
+		resultType="int">
+		select count(*) from
+		place_like pl, place p
+		where
+		p.place_no =#{placeNo} and
 		p.place_no=pl.place_no
 
 	</select>
-	
+
 	<update id="updatePlace" parameterType="place">
-		update place set 
+		update place set
 		place_address = #{placeAddress},
 		place_phone = #{placePhone},
 		place_position_x = #{placePositionX},
-		place_position_y = #{placePositionY},
+		place_position_y =
+		#{placePositionY},
 		place_comment = #{placeComment},
-		place_cert = #{placeCert}
+		place_cert =
+		#{placeCert}
 		where place_no=#{placeNo}
-		
+
 	</update>
-	
+
 
 	<insert id="insertPlace" parameterType="place">
 		insert into
@@ -116,7 +129,7 @@
 		#{placeCert},
 		#{memberId})
 	</insert>
-	
+
 	<insert id="insertGroupPlace" parameterType="hashmap">
 		insert into
 		place_grouping
@@ -125,17 +138,19 @@
 		#{groupDetailNo})
 	</insert>
 
-	<select id="selectNoByPlaceName" parameterType="string" resultType="int">
+	<select id="selectNoByPlaceName" parameterType="string"
+		resultType="int">
 		select place_no
 		from place
 		where place_name=#{placeName}
 	</select>
-	<select id="selectPlaceByName" parameterType="string" resultType="place">
+	<select id="selectPlaceByName" parameterType="string"
+		resultType="place">
 		select *
 		from place
 		where place_name=#{placeName}
 	</select>
-	
+
 	<select id="selectDetailNo" parameterType="hashmap" resultType="int">
 		select group_detail_no
 		from group_detail
@@ -148,24 +163,26 @@
 		resultType="int">
 		select count(*)
 		from place_grouping
-		where place_no = #{placeNo}
+		where place_no =
+		#{placeNo}
 		and group_detail_no = #{detailNo}
 	</select>
-	
-	
-	
+
+
+
 	<delete id="deleteGroupDetailByPlaceNo" parameterType="int">
-		delete from place_grouping where place_no=#{placeNo}
+		delete
+		from place_grouping where place_no=#{placeNo}
 	</delete>
-	
+
 	<update id="updatePlaceByPlace" parameterType="place">
-		update place set 
-		place_phone=#{placePhone}, 
-		place_comment=#{placeComment} 
-		where place_no=#{placeNo} 
+		update place set
+		place_phone=#{placePhone},
+		place_comment=#{placeComment}
+		where place_no=#{placeNo}
 	</update>
-	
-	
-	
+
+
+
 
 </mapper>
