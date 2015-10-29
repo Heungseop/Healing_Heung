@@ -43,10 +43,11 @@ public class PlaceController {
 	public String place_mainGet(Model model) {
 		// logger.trace("(placeController) /place_main RUN");
 
-		List<Place> allPlaceList = pservice.selectAllList();// 전체 관광지를 반환한다고 가정
-		for(Place p : allPlaceList){
+//		List<Place> allPlaceList = pservice.selectAllList();// 전체 관광지를 반환한다고 가정
+		List<Place> allPlaceList = pservice.selectPlaceNine(1);
+		/*for(Place p : allPlaceList){
 			p.setLike( pservice.selectPlaceLikeCount(p.getPlaceNo()));
-		}
+		}*/
 		model.addAttribute("contentpage", "/WEB-INF/view/place/place_main.jsp");
 		model.addAttribute("allPlace", allPlaceList);
 
@@ -359,5 +360,12 @@ public class PlaceController {
 		return "redirect:place_ok";
 	}
 
+	@RequestMapping(value = "/selectPlaceNine", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public @ResponseBody String selectPlaceNine(Model model, @RequestParam int rnum) {
+		List<Place> list = pservice.selectPlaceNine(rnum);
+		logger.trace("selectPlaceNine   rnum : {}", rnum);
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
 
 }

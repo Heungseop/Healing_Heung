@@ -365,4 +365,15 @@ public class PlaceServiceImpl implements PlaceService {
 		return result;
 	}
 
+	@Override
+	public List<Place> selectPlaceNine(int rnum) {
+		List<Place> list = 	pdao.selectListPlaceNine(rnum);
+		for(Place p: list){
+			p.setImageUrlUrl(pdao.selectImageUrl(p.getPlaceNo()));
+			p.setImageFileUrl(pdao.selectImageFileUrl(p.getPlaceNo()));
+			p.setLike(pdao.selectPlaceLikeCountByPlaceNo(p.getPlaceNo()));
+		}
+		return list;
+	}
+
 }

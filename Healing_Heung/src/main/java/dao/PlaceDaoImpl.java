@@ -226,6 +226,19 @@ public class PlaceDaoImpl implements PlaceDao {
 		int result =session.selectOne(stmt,placeNo);
 		return result;
 	}
+
+	@Override
+	public List<Place> selectListPlaceNine(int rnum) {
+		String stmt = namespace + "selectPlaceNine";
+		int to, from ;
+		to = rnum *9;
+		from = to-8;
+		Map<String, Object> map = new HashMap<>();
+		map.put("to", to);
+		map.put("from", from);
+		List<Place> list = session.selectList(stmt, map);
+		return list;
+	}
 	
 	
 

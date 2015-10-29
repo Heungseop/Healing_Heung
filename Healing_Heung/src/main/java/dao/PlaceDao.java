@@ -53,6 +53,8 @@ public interface PlaceDao {
 	public int selectDetailNoFromGruoping(int placeNo, int detailNo);
 
 	public List<Place> selectCertfalsePlace();
+	
+	public List<Place> selectListPlaceNine(int rnum);
 
 
 }
