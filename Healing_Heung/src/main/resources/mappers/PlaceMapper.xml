@@ -28,7 +28,7 @@
 	</select>
 	<select id="selectPlaceNine" parameterType="hashmap" resultType="place">
 		select ss.*
-		from (select sub.*, ROWNUM as rnum from (select * from place)sub)ss
+		from (select sub.*, ROWNUM as rnum from (select * from place where place_cert = 1)sub)ss
 		where ss.rnum between #{from} and #{to}
 
 	</select>
