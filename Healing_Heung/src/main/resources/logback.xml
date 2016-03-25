@@ -11,21 +11,21 @@
 	</appender>
 
 	<!-- 날짜별 로그 -->
-	<property name="DEV_HOME" value="c:/temp" />
+	<!-- <property name="DEV_HOME" value="c:/temp" />
 	<appender name="DAILYOUT"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${DEV_HOME}/logFile.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
+			daily rollover
 			<fileNamePattern>/log/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<!-- keep 30 days' worth of history -->
+			keep 30 days' worth of history
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
 			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
 			</pattern>
 		</encoder>
-	</appender>
+	</appender> -->
 
 	<!-- root 로거 기본 설정 -->
 	<root level="TRACE">
