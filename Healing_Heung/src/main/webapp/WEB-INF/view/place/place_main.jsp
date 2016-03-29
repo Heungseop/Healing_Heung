@@ -99,6 +99,7 @@ border : solid 1px;
 <script type="text/javascript">
 $(function(){
 	var cnt = 2;
+	var lastscroll = 0;
 	$(window).scroll(function(){
 		var winh = window.innerHeight;
 		var doch = $(document).height()
@@ -114,9 +115,11 @@ $(function(){
 					console.log("$(window).height() : ",$(window).height());
 					console.log("$(document).scrollTop() : ",$(document).scrollTop());
 					 */
-					if ($(window).scrollTop() >= (doch - winh) && $(window).scrollTop() != 0) {
+					if ($(window).scrollTop() >= (doch - winh) && $(window).scrollTop() != 0 && lastscroll != $(window).scrollTop()) {
 						console.log("inner if//////////(doch-winh): ",
 								(doch - winh));
+						console.log("lastscroll : ", lastscroll);
+						lastscroll = $(window).scrollTop();
 
 						$.ajax({
 							type : "post",
@@ -126,7 +129,9 @@ $(function(){
 							},
 							dataType : "json",
 							success : function(list) {
+								console.log("scrolltop in ajax function : ", $(window).scrollTop() )
 								console.log("list : ", list);
+								console.log("cnt : ", cnt);
 								$.each(list, function(index, place) {
 
 									var img = null;
@@ -154,8 +159,10 @@ $(function(){
 									str += '<div class="placeinfo" style="height = 500px;">';
 									str += place.placeName + '</div><br><br></div>';
 									$("#target").append(str);
+									
 								});
 
+								console.log("test success function ");
 								cnt++;
 							}
 						});
