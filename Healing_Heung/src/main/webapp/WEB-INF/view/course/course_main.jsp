@@ -74,9 +74,8 @@
 	</div>
 </body>
 
-<script
-	src="//apis.daum.net/maps/maps3.js?apikey=8db10793985b77516d67e5101b49f26e&libraries=services"></script>
-
+<!-- <script src="//apis.daum.net/maps/maps3.js?apikey=b5760f0544aa66f4420418d9c5b2b109&libraries=services"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b5760f0544aa66f4420418d9c5b2b109"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script
@@ -91,33 +90,33 @@
 	console.log("allCourseList : ", list);
 	$.each(list, function(index, course) {
 
-		var bounds = new daum.maps.LatLngBounds();
+		var bounds = new kakao.maps.LatLngBounds();
 		var mapContainer = document.getElementById(index + 'map'), // 지도를 표시할 div  
 		mapOption = {
-			center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			level : 3,
 			draggable : false
 		// 지도의 확대 레벨
 		};
 
-		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		var points = 0;
 		$.each(course.placeList, function(pindex, place) {
 			var point;
 		/* 	 if (place.placePositionX == 0) {
-				var places = new daum.maps.services.Places();
+				var places = new kakao.maps.services.Places();
 
 				places.keywordSearch(place.placeName, function(status, result) {
-					if (status === daum.maps.services.Status.OK) {
+					if (status === kakao.maps.services.Status.OK) {
 						console.log(result);
-						point = new daum.maps.LatLng(result.places[0].latitude,
+						point = new kakao.maps.LatLng(result.places[0].latitude,
 								result.places[0].longitude);
 						
 					}
 				});
 
 			} else {  */
-				point = new daum.maps.LatLng(place.placePositionX,
+				point = new kakao.maps.LatLng(place.placePositionX,
 						place.placePositionY);
 	//		}
 			if (points == 0) {
@@ -127,7 +126,7 @@
 			}
 			bounds.extend(point);
 			var marker;
-			marker = new daum.maps.Marker({
+			marker = new kakao.maps.Marker({
 				position : point,
 				clickable : false
 			});
@@ -136,7 +135,7 @@
 					+ '  <span class="title">' + place.placeName + '</span>'
 					+ '</div>';
 
-			var customOverlay = new daum.maps.CustomOverlay({
+			var customOverlay = new kakao.maps.CustomOverlay({
 				position : point,
 				content : iwContent
 			});
@@ -146,7 +145,7 @@
 		});
 
 		map.setBounds(bounds);
-		clickLine = new daum.maps.Polyline({
+		clickLine = new kakao.maps.Polyline({
 			map : map, // 선을 표시할 지도입니다 
 			path : points, // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
 			strokeWeight : 3, // 선의 두께입니다 

@@ -181,7 +181,7 @@ public class PlaceController {
 		for (int i = 0; i < place.getImageFile().size(); i++) {
 			if (place.getImageFile().get(i).getOriginalFilename() != "") {
 
-				File file = new File("c:/Temp/upload/" + place.getImageFile().get(i).getOriginalFilename());
+				File file = new File("D:/Temp/upload/" + place.getImageFile().get(i).getOriginalFilename());
 				logger.trace("DB에 저장할 값:" + place.getImageFile().get(i).getOriginalFilename());
 				place.getImageFile().get(i).transferTo(file);
 
@@ -335,7 +335,7 @@ public class PlaceController {
 		for (int i = 0; i < place.getImageFile().size(); i++) {
 			if (place.getImageFile().get(i).getOriginalFilename() != "") {
 
-				File file = new File("c:/Temp/upload/" + place.getImageFile().get(i).getOriginalFilename());
+				File file = new File("D:/Temp/upload/" + place.getImageFile().get(i).getOriginalFilename());
 				logger.trace("DB에 저장할 값:" + place.getImageFile().get(i).getOriginalFilename());
 				place.getImageFile().get(i).transferTo(file);
 

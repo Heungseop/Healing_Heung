@@ -1,0 +1,30 @@
+
+drop table member cascade constraints;
+drop table board cascade constraints;
+drop table reply cascade constraints;
+drop table course cascade constraints;
+drop table place cascade constraints;
+drop table image_url cascade constraints;
+drop table board_like cascade constraints;
+drop table reply_like cascade constraints;
+drop table course_like_unlike cascade constraints;
+drop table place_like cascade constraints;
+drop table big_group cascade constraints;
+drop table group_detail cascade constraints;
+drop table mncourse cascade constraints;
+drop table place_grouping cascade constraints;
+
+drop sequence member_seq;
+drop sequence board_seq;
+drop sequence reply_seq;
+drop sequence place_seq;
+drop sequence course_seq;
+drop sequence mncourse_seq;
+drop sequence course_like_unlike_seq;
+drop sequence reply_like_seq;
+drop sequence board_like_seq;
+drop sequence place_like_seq;
+drop sequence image_url_seq;
+drop sequence place_grouping_seq;
+drop sequence group_detail_seq;
+drop sequence big_group_seq;
